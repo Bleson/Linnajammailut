@@ -3,18 +3,21 @@ using System.Collections;
 
 public class BallSpawner : MonoBehaviour {
 
-    //Camera cam;
-    public GameObject BallToSpawn;
+    public bool enableOffset = true;
+    public GameObject ObjectToSpawn;
     float time;
     float offset = 0f;
     public float spawnFrequency = 4;
 
     void Start()
     {
-        //cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        offset = Random.Range(-1f, 1f);
-        time += offset;
-        spawnFrequency += offset;
+        Spawn();
+        if (enableOffset)
+        {
+            offset = Random.Range(-1f, 1f);
+            time += offset;
+            spawnFrequency += offset;
+        }
     }
 
 	void Update () {
@@ -22,7 +25,12 @@ public class BallSpawner : MonoBehaviour {
         if (time >= spawnFrequency)
         {
             time = 0f;
-            Instantiate(BallToSpawn, gameObject.transform.position, gameObject.transform.rotation);
+            Spawn();
         }
 	}
+
+    void Spawn()
+    {
+        Instantiate(ObjectToSpawn, gameObject.transform.position, gameObject.transform.rotation);
+    }
 }
