@@ -3,25 +3,37 @@ using System.Collections;
 
 public class GameController : MonoBehaviour
 {
+    float lerpTime = 1f;
+    float currentLerpTime;
+    Vector3 startPos;
+    Vector3 endPos;
 
     public Camera cam;
     public bool mouseDown = false;
     public Block lastBlock;
     private Block lastBlockScoreCheck;
-    public float scoreCheckDelay;
-    private float highestBlockY;
+    public float scoreCheckDelay = 2f;
+    public float highestBlockY;
+
+    private bool moveCamera;
+    private float cameraStartPos;
+    public float cameraOffset;
 
     // Use this for initialization
     void Start()
     {
-
+        cameraStartPos = cam.transform.position.y;
+        startPos = cam.transform.position;
+        endPos = cam.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        MoveCamera();
+        
         if (Input.GetMouseButtonDown(0) || mouseDown)
-        {
+        {           
             mouseDown = true;
             if (lastBlock == null)
             {
@@ -60,16 +72,38 @@ public class GameController : MonoBehaviour
     }
     void SaveBlockHeight()
     {
-        if (lastBlockScoreCheck.transform.position.y > highestBlockY)
+        if (lastBlockScoreCheck && lastBlockScoreCheck)
         {
-            highestBlockY = (int)(lastBlockScoreCheck.transform.position.y);
-        }
+            if (lastBlockScoreCheck.transform.position.y > highestBlockY)
+            {
+                highestBlockY = (int)(lastBlockScoreCheck.transform.position.y);
+
+                if (highestBlockY > cameraStartPos)
+                {
+                    currentLerpTime = 0f;
+                    startPos = cam.transform.position;
+                    endPos = new Vector3(cam.transform.position.x, highestBlockY, cam.transform.position.z);
+                }                
+            }
+        }        
     }
     void MoveCamera()
     {
-        /*Vector3 point = cam.WorldToViewportPoint(target.position);
-        Vector3 delta = target.position - cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
-        Vector3 destination = transform.position + delta;
-        transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);*/
+        currentLerpTime += Time.deltaTime;
+        if (currentLerpTime > lerpTime)
+        {
+            currentLerpTime = lerpTime;
+        }
+
+        float perc = currentLerpTime / lerpTime;
+        cam.transform.position = Vector3.Lerp(startPos, endPos, perc);
+
+        /*
+        cam.transform.position = new Vector3(cam.transform.position.x, highestBlockY, cam.transform.position.z);
+        if (cam.transform.position.y >= highestBlockY)
+        {
+            cam.transform.position = new Vector3(cam.transform.position.x, highestBlockY, cam.transform.position.z);
+            moveCamera = false;
+        }*/
     }
 }
