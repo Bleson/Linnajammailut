@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
-    bool frozen = true;
+    public bool frozen = true;
 
     void Start()
     {
