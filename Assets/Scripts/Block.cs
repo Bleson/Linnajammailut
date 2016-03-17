@@ -4,6 +4,21 @@ using System.Collections;
 public class Block : MonoBehaviour {
 
     public bool frozen = true;
+    public float lastTouched = 0;
+    public bool countLastTouched = false;
+
+    void Update()
+    {
+        if (!frozen && countLastTouched)
+        {
+            lastTouched += Time.fixedDeltaTime;
+            Debug.Log(lastTouched);
+            if (lastTouched > 2f)
+            {
+                
+            }
+        }       
+    }
 
     void Start()
     {

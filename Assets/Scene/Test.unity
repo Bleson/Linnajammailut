@@ -97,7 +97,7 @@ GameObject:
   - 65: {fileID: 139296988}
   - 23: {fileID: 139296987}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,44 +209,40 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1897778547}
     m_Modifications:
-    - target: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+    - target: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
       propertyPath: m_LocalPosition.x
       value: -7
       objectReference: {fileID: 0}
-    - target: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+    - target: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+    - target: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
       propertyPath: m_LocalPosition.z
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+    - target: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+    - target: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+    - target: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+    - target: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+    - target: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 192796, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
-      propertyPath: m_Name
-      value: Ball Spawner left
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &608514848
 GameObject:
@@ -339,7 +335,9 @@ MonoBehaviour:
   cam: {fileID: 1897778546}
   mouseDown: 0
   lastBlock: {fileID: 0}
-  scoreCheckDelay: 0
+  scoreCheckDelay: 2
+  highestBlockY: 0
+  cameraOffset: 0
 --- !u!4 &677522696
 Transform:
   m_ObjectHideFlags: 0
@@ -354,7 +352,7 @@ Transform:
   m_RootOrder: 1
 --- !u!4 &706545845 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 425918, guid: 9d9e11953c47cd145bc21dc1fcad4bd8, type: 2}
+  m_PrefabParentObject: {fileID: 495162, guid: c8dd32024440f5545a5d0f2b32360019, type: 2}
   m_PrefabInternal: {fileID: 273152056}
 --- !u!4 &969134287 stripped
 Transform:

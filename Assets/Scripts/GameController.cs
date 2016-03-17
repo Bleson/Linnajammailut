@@ -3,11 +3,6 @@ using System.Collections;
 
 public class GameController : MonoBehaviour
 {
-    float lerpTime = 1f;
-    float currentLerpTime;
-    Vector3 startPos;
-    Vector3 endPos;
-
     public Camera cam;
     public bool mouseDown = false;
     public Block lastBlock;
@@ -15,9 +10,15 @@ public class GameController : MonoBehaviour
     public float scoreCheckDelay = 2f;
     public float highestBlockY;
 
+    //camera stuff
+    float lerpTime = 1f;
+    float currentLerpTime;
+    Vector3 startPos;
+    Vector3 endPos;
+
     private bool moveCamera;
     private float cameraStartPos;
-    public float cameraOffset;
+    public float cameraOffset; //ei  käytössä vielä
 
     // Use this for initialization
     void Start()
@@ -65,18 +66,26 @@ public class GameController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             mouseDown = false;
-            lastBlockScoreCheck = lastBlock;
-            lastBlock = null;
-            Invoke("SaveBlockHeight", scoreCheckDelay);
+            if (lastBlock != null)
+            {
+                lastBlockScoreCheck = lastBlock;
+                if (!lastBlockScoreCheck.countLastTouched)
+                {
+                    lastBlockScoreCheck.lastTouched = 0f;
+                    lastBlockScoreCheck.countLastTouched = true;
+                }
+                lastBlock = null;
+            }
         }
     }
-    void SaveBlockHeight()
+    void SaveBlockHeight(float newHeight)
     {
-        if (lastBlockScoreCheck && lastBlockScoreCheck)
+        if (lastBlockScoreCheck && lastBlockScoreCheck.lastTouched >= scoreCheckDelay)
         {
             if (lastBlockScoreCheck.transform.position.y > highestBlockY)
             {
                 highestBlockY = (int)(lastBlockScoreCheck.transform.position.y);
+                lastBlockScoreCheck.countLastTouched = false;
 
                 if (highestBlockY > cameraStartPos)
                 {
@@ -97,13 +106,5 @@ public class GameController : MonoBehaviour
 
         float perc = currentLerpTime / lerpTime;
         cam.transform.position = Vector3.Lerp(startPos, endPos, perc);
-
-        /*
-        cam.transform.position = new Vector3(cam.transform.position.x, highestBlockY, cam.transform.position.z);
-        if (cam.transform.position.y >= highestBlockY)
-        {
-            cam.transform.position = new Vector3(cam.transform.position.x, highestBlockY, cam.transform.position.z);
-            moveCamera = false;
-        }*/
     }
 }
