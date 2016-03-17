@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66209faf001e5d54b94ff82b075aeb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -10
-  maxX: 10
+  minX: -12
+  maxX: 12
   speed: -0.35
 --- !u!1001 &158581022
 Prefab:
@@ -442,8 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66209faf001e5d54b94ff82b075aeb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -10
-  maxX: 10
+  minX: -12
+  maxX: 12
   speed: 0.2
 --- !u!1 &376153869
 GameObject:
@@ -515,8 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66209faf001e5d54b94ff82b075aeb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -10
-  maxX: 10
+  minX: -12
+  maxX: 12
   speed: -0.3
 --- !u!1 &403171878
 GameObject:
@@ -1051,8 +1051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66209faf001e5d54b94ff82b075aeb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -10
-  maxX: 10
+  minX: -12
+  maxX: 12
   speed: 0.27
 --- !u!212 &1045671877
 SpriteRenderer:
@@ -1166,8 +1166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66209faf001e5d54b94ff82b075aeb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -10
-  maxX: 10
+  minX: -12
+  maxX: 12
   speed: 0.3
 --- !u!1 &1193728909
 GameObject:
@@ -1418,8 +1418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66209faf001e5d54b94ff82b075aeb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -10
-  maxX: 10
+  minX: -12
+  maxX: 12
   speed: 0.3
 --- !u!212 &1356151013
 SpriteRenderer:
@@ -1761,8 +1761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66209faf001e5d54b94ff82b075aeb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -10
-  maxX: 10
+  minX: -12
+  maxX: 12
   speed: -0.1
 --- !u!1 &1715090880
 GameObject:
