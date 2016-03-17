@@ -11,12 +11,15 @@ public class BallSpawner : MonoBehaviour {
 
     void Start()
     {
-        Spawn();
         if (enableOffset)
         {
             offset = Random.Range(-1f, 1f);
             time += offset;
             spawnFrequency += offset;
+        }
+        else //BoxSpawner
+        {
+            Spawn();
         }
     }
 

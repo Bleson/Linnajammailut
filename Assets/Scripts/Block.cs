@@ -76,10 +76,10 @@ public class Block : MonoBehaviour
         {
             gController.Lose();
         }
-        else if(GroundCheck(collision))
-        {
-            wasTouchingGround = false;
-        }
+        //else if(GroundCheck(collision))
+        //{
+
+        //}
     }
     bool GroundCheck(Collision collision)
     {

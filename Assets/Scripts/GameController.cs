@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour
 {
     bool gameOver = false;
+    float scoreMultiplier = 10f;
 
     public bool mouseDown = false;
     public bool mouse2Down = false;
@@ -24,6 +26,11 @@ public class GameController : MonoBehaviour
     bool moveCamera;
     float cameraOffset;
     public float cameraMovementTime = 2f;
+
+    public GameObject gameOverScreen;
+    public Text scoreText;
+    public Text scoreTextGameOver;
+    public string TEXT_SCORE = "SCORE: ";
 
     // Use this for initialization
     void Start()
@@ -146,10 +153,20 @@ public class GameController : MonoBehaviour
                 moveCamera = true;
                 Invoke("StopCameraMovement", cameraMovementTime);
             }
+            UpdateScoreText();
         }
     }
+
     public void Lose()
     {
+        gameOverScreen.active = true;
+        gameOver = true;
         Debug.Log("You lose!");//Lose game
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = TEXT_SCORE + (Mathf.RoundToInt(scoreMultiplier * highscore)).ToString();
+        scoreTextGameOver.text = (Mathf.RoundToInt(scoreMultiplier * highscore)).ToString();
     }
 }
