@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableOffset: 1
   ObjectToSpawn: {fileID: 194730, guid: 15af6abca40d7f146b2122a5edd02318, type: 2}
-  spawnFrequency: 2
+  spawnFrequency: 5
 --- !u!136 &13656036
 CapsuleCollider:
   m_ObjectHideFlags: 1

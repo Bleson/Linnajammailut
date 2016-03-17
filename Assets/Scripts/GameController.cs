@@ -3,37 +3,42 @@ using System.Collections;
 
 public class GameController : MonoBehaviour
 {
-    public Camera cam;
+    bool gameOver = false;
+
     public bool mouseDown = false;
+    public bool mouse2Down = false;
+    bool rotateToHorizontalNext = true;
+
     public Block lastBlock;
-    private Block lastBlockScoreCheck;
+    Block lastBlockScoreCheck;
     public float scoreCheckDelay = 2f;
-    public float highestBlockY;
+    public float highscore;
 
     //camera stuff
     float lerpTime = 1f;
     float currentLerpTime;
-    Vector3 startPos;
-    Vector3 endPos;
+    Vector3 cameraStartPos;
+    Vector3 cameraEndPos;
 
-    private bool moveCamera;
-    private float cameraStartPos;
-    public float cameraOffset; //ei  käytössä vielä
+    public Camera cam;
+    bool moveCamera;
+    float cameraOffset;
+    public float cameraMovementTime = 2f;
 
     // Use this for initialization
     void Start()
     {
-        cameraStartPos = cam.transform.position.y;
-        startPos = cam.transform.position;
-        endPos = cam.transform.position;
+        cameraOffset = cam.transform.position.y;
+        cameraStartPos = cam.transform.position;
+        cameraEndPos = cam.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveCamera();
-        
-        if (Input.GetMouseButtonDown(0) || mouseDown)
+        #region Mouse1 Input
+        //Mouse click action
+        if (Input.GetMouseButtonDown(0) || mouseDown && !gameOver)
         {           
             mouseDown = true;
             if (lastBlock == null)
@@ -45,10 +50,12 @@ public class GameController : MonoBehaviour
                 {
                     Rigidbody lol = hit.rigidbody;
 
+                    //Testaa klikatun objektin
                     if (lol.tag.ToString() == "Block")
                     {
                         lastBlock = lol.transform.gameObject.GetComponent<Block>();
-                        Debug.Log("Clicked block " + lastBlock);
+                        lastBlock.StopTimer();
+
                         if (lastBlock.frozen)
                         {
                             lastBlock.Unfreeze();
@@ -63,6 +70,7 @@ public class GameController : MonoBehaviour
             }
         }
 
+        //Mouse release
         if (Input.GetMouseButtonUp(0))
         {
             mouseDown = false;
@@ -71,32 +79,42 @@ public class GameController : MonoBehaviour
                 lastBlockScoreCheck = lastBlock;
                 if (!lastBlockScoreCheck.countLastTouched)
                 {
-                    lastBlockScoreCheck.lastTouched = 0f;
-                    lastBlockScoreCheck.countLastTouched = true;
+                    lastBlockScoreCheck.StartTimer();
                 }
                 lastBlock = null;
             }
         }
-    }
-    void SaveBlockHeight(float newHeight)
-    {
-        if (lastBlockScoreCheck && lastBlockScoreCheck.lastTouched >= scoreCheckDelay)
-        {
-            if (lastBlockScoreCheck.transform.position.y > highestBlockY)
-            {
-                highestBlockY = (int)(lastBlockScoreCheck.transform.position.y);
-                lastBlockScoreCheck.countLastTouched = false;
+        #endregion
 
-                if (highestBlockY > cameraStartPos)
-                {
-                    currentLerpTime = 0f;
-                    startPos = cam.transform.position;
-                    endPos = new Vector3(cam.transform.position.x, highestBlockY, cam.transform.position.z);
-                }                
+        #region Mouse2 Input
+        if (Input.GetMouseButtonDown(1) && mouseDown && !gameOver && lastBlock != null && !mouse2Down)
+        {
+            if (rotateToHorizontalNext)
+            {
+                lastBlock.transform.rotation = Quaternion.Euler(Vector3.zero);
             }
-        }        
+            else
+            {
+                lastBlock.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
+            }
+            lastBlock.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            rotateToHorizontalNext = !rotateToHorizontalNext;
+            mouse2Down = true;
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            mouse2Down = false;
+        }
+        #endregion
+
+        if (moveCamera)
+        {
+            MoveCamera();
+        }
     }
-    void MoveCamera()
+
+    void MoveCamera() //Move camera according to the high score
     {
         currentLerpTime += Time.deltaTime;
         if (currentLerpTime > lerpTime)
@@ -105,6 +123,33 @@ public class GameController : MonoBehaviour
         }
 
         float perc = currentLerpTime / lerpTime;
-        cam.transform.position = Vector3.Lerp(startPos, endPos, perc);
+        Vector3 newCamPos = Vector3.Lerp(cameraStartPos, cameraEndPos, perc);
+
+        cam.transform.position = newCamPos;
+    }
+
+    void StopCameraMovement()
+    {
+        moveCamera = false;
+        currentLerpTime = 0f;
+    }
+
+    public void UpdateHighscore(float newScore)
+    {
+        if (newScore > highscore)
+        {
+            highscore = newScore;
+            cameraStartPos = cam.transform.position;
+            if (highscore > cameraOffset)
+            {
+                cameraEndPos = new Vector3(0f, highscore, cam.transform.position.z);
+                moveCamera = true;
+                Invoke("StopCameraMovement", cameraMovementTime);
+            }
+        }
+    }
+    public void Lose()
+    {
+        Debug.Log("You lose!");//Lose game
     }
 }

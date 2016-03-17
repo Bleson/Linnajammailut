@@ -7,6 +7,8 @@ public class CannonBall : MonoBehaviour {
     public float velocityX = 8f;
     public float velocityY = 7f;
     public float velocityMaxOffset = 2f;
+    public float lifeTime = 5f;
+    public float timeLived;
 
     // Use this for initialization
     void Start () {
@@ -24,8 +26,11 @@ public class CannonBall : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        if (gameObject.transform.position.y <= 0f)
+	void Update ()
+    {
+        timeLived += Time.fixedDeltaTime;
+
+        if (gameObject.transform.position.y <= 0f || lifeTime < timeLived)
         {
             Destroy(gameObject);
         }
