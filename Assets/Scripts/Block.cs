@@ -29,6 +29,8 @@ public class Block : MonoBehaviour
     {
         gController = FindObjectOfType<GameController>();
         gameObject.GetComponent<Rigidbody>().useGravity = false;
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
         gameObject.transform.parent = gController.cam.transform;
     }
@@ -36,6 +38,7 @@ public class Block : MonoBehaviour
     public void Unfreeze()
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true;
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<BoxCollider>().isTrigger = false;
     }
 
