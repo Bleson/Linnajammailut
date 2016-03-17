@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
 
     public bool mouseDown = false;
     public bool mouse2Down = false;
-    bool rotateToHorizontalNext = true;
+    public bool rotateToHorizontalNext = true;
 
     public Block lastBlock;
     Block lastBlockScoreCheck;

@@ -40,6 +40,7 @@ public class Block : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<BoxCollider>().isTrigger = false;
+        gameObject.transform.parent = null;
     }
 
     public void Move(Vector3 targetLocation)
