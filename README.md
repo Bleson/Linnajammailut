@@ -15,5 +15,6 @@ or horizontal rotation.
 Programming: 
 - Markus Hyvärinen (Bleson)
 - Veikka Huttunen (Vegetabbel)
+
 Art:
 - Veikka Huttunen (Vegetabbel)
