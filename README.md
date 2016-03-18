@@ -10,3 +10,10 @@ You gain more score by building a higher tower.
 You can click and drag bricks in order to build a higher tower.
 Use your right mouse button to rotate the brick to a vertical
 or horizontal rotation.
+
+#Credits
+Programming: 
+- Markus Hyvärinen (Bleson)
+- Veikka Huttunen (Vegetabbel)
+Art:
+- Veikka Huttunen (Vegetabbel)
